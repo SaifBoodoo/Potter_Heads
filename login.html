@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Potterheads</title>
+    <style>
+        :root {
+            --hogwarts-dark: #2c2c2c;
+            --gryffindor-gold: #d3a625;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            background: url('images/hogwarts-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+        }
+        
+        .login-container {
+            background-color: rgba(44, 44, 44, 0.9);
+            padding: 2rem 3rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            border: 2px solid var(--gryffindor-gold);
+        }
+        
+        .login-container h1 {
+            margin-top: 0;
+            color: var(--gryffindor-gold);
+            font-size: 2rem;
+        }
+        
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .form-group input {
+            padding: 0.8rem;
+            border-radius: 5px;
+            border: none;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+        }
+        
+        .login-btn {
+            background-color: var(--gryffindor-gold);
+            color: var(--hogwarts-dark);
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Georgia', serif;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .login-btn:hover {
+            background-color: #e0b52b;
+            transform: translateY(-2px);
+        }
+        
+        .error-message {
+            color: #ff6b6b;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        @media (max-width: 500px) {
+            .login-container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <img src="images/logo.png" alt="Hogwarts Logo" width="100">
+        <h1>Welcome to Potterheads</h1>
+        <p>Please log in to take the sorting quiz</p>
+        
+        <form class="login-form" id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            
+            <button type="submit" class="login-btn">Login</button>
+            <p class="error-message" id="errorMessage">Invalid username or password</p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username === 'bob' && password === 'bobpass') {
+                // Successful login
+                localStorage.setItem('loggedIn', 'true');
+                window.location.href = 'potterheads.html'; // Redirect to homepage
+            } else {
+                // Show error message
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

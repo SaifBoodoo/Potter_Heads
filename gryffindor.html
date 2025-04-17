@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gryffindor House | Potterheads</title>
+    <style>
+        :root {
+            --primary-color: #740001;
+            --secondary-color: #d3a625;
+            --text-color: #3d3d3d;
+            --bg-color: #fff9e5;
+        }
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        .house-header {
+            background: linear-gradient(135deg, var(--primary-color), #8b0000);
+            color: var(--secondary-color);
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 5px solid var(--secondary-color);
+        }
+        .house-header h1 {
+            font-size: 3rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .house-header img {
+            height: 150px;
+            margin: 1rem 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        .house-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .house-details, .house-traits {
+            flex: 1;
+            min-width: 300px;
+        }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+        }
+        .founder, .ghost, .traits-list {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+        .traits-list ul {
+            columns: 2;
+            list-style-type: none;
+            padding: 0;
+        }
+        .traits-list li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        .traits-list li:before {
+            content: "⚔️";
+            position: absolute;
+            left: 0;
+        }
+        .notable-members {
+            margin-top: 2rem;
+        }
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        .member-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .member-card:hover {
+            transform: translateY(-5px);
+        }
+        .member-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+        .member-info {
+            padding: 1rem;
+        }
+        .member-info h3 {
+            margin: 0;
+            color: var(--primary-color);
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+        @media (max-width: 768px) {
+            .traits-list ul {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="house-header">
+        <h1>Gryffindor House</h1>
+        <img src="images/gryffindorsymbol.png" alt="Gryffindor Crest">
+        <p>"You might belong in Gryffindor, where dwell the brave at heart, their daring, nerve, and chivalry set Gryffindors apart."</p>
+    </header>
+
+    <div class="container">
+        <div class="house-info">
+            <div class="house-details">
+                <div class="founder">
+                    <h2>Founder</h2>
+                    <h3>Godric Gryffindor</h3>
+                    <p>One of the four founders of Hogwarts School of Witchcraft and Wizardry, Godric Gryffindor prized courage, determination and strength of heart above all other qualities.</p>
+                </div>
+
+                <div class="ghost">
+                    <h2>House Ghost</h2>
+                    <h3>Nearly Headless Nick</h3>
+                    <p>Sir Nicholas de Mimsy-Porpington, known as Nearly Headless Nick, is the Gryffindor house ghost. He was beheaded but the axe was blunt so it didn't fully go through his neck.</p>
+                </div>
+            </div>
+
+            <div class="house-traits">
+                <div class="traits-list">
+                    <h2>House Traits</h2>
+                    <ul>
+                        <li>Courage</li>
+                        <li>Bravery</li>
+                        <li>Nerve</li>
+                        <li>Chivalry</li>
+                        <li>Determination</li>
+                        <li>Daring</li>
+                        <li>Loyalty</li>
+                        <li>Adventurous spirit</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="notable-members">
+            <h2>Notable Members</h2>
+            <div class="members-grid">
+                <div class="member-card">
+                    <img src="images/harry-potter.jpg" alt="Harry Potter">
+                    <div class="member-info">
+                        <h3>Harry Potter</h3>
+                        <p>The Boy Who Lived, defeater of Voldemort</p>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <img src="images/hermione.jpg" alt="Hermione Granger">
+                    <div class="member-info">
+                        <h3>Hermione Granger</h3>
+                        <p>Brightest witch of her age</p>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <img src="images/ron.jpg" alt="Ron Weasley">
+                    <div class="member-info">
+                        <h3>Ron Weasley</h3>
+                        <p>Loyal friend, chess champion</p>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <img src="images/dumbledore.jpg" alt="Albus Dumbledore">
+                    <div class="member-info">
+                        <h3>Albus Dumbledore</h3>
+                        <p>Greatest wizard of modern times</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="potterheads.html" class="back-button">Back to Home</a>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        if (localStorage.getItem('loggedIn') !== 'true') {
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

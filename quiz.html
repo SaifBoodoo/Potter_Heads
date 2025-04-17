@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hogwarts Sorting Quiz | Potterheads</title>
+    <style>
+        :root {
+            --gryffindor-red: #740001;
+            --gryffindor-gold: #d3a625;
+            --slytherin-green: #1a472a;
+            --slytherin-silver: #aaaaaa;
+            --ravenclaw-blue: #0e1a40;
+            --ravenclaw-bronze: #946b2d;
+            --hufflepuff-yellow: #ffdb00;
+            --hufflepuff-black: #000000;
+            --hogwarts-dark: #2c2c2c;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .quiz-header {
+            background: linear-gradient(135deg, var(--hogwarts-dark), #5c5c5c);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 5px solid var(--gryffindor-gold);
+        }
+        
+        .quiz-header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .quiz-header img {
+            height: 100px;
+            margin: 1rem 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .quiz-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .question {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .question.active {
+            display: block;
+        }
+        
+        h2 {
+            color: var(--hogwarts-dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        .option {
+            background-color: #f9f9f9;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .option:hover {
+            background-color: #f0f0f0;
+            border-color: #ccc;
+        }
+        
+        .option.selected {
+            border-color: var(--gryffindor-gold);
+            background-color: #fff9e5;
+            box-shadow: 0 0 0 3px rgba(210, 166, 37, 0.3);
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .prev-btn {
+            background-color: #ddd;
+            color: #333;
+        }
+        
+        .next-btn {
+            background-color: var(--hogwarts-dark);
+            color: white;
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, var(--gryffindor-red), var(--slytherin-green));
+            color: white;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .progress-container {
+            width: 100%;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            border-radius: 10px;
+            background: linear-gradient(to right, 
+                var(--gryffindor-red), 
+                var(--slytherin-green), 
+                var(--ravenclaw-blue), 
+                var(--hufflepuff-yellow));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .result-container {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            border-radius: 8px;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .gryffindor-result {
+            background-color: rgba(116, 0, 1, 0.1);
+            border: 3px solid var(--gryffindor-red);
+        }
+        
+        .hufflepuff-result {
+            background-color: rgba(255, 219, 0, 0.1);
+            border: 3px solid var(--hufflepuff-yellow);
+        }
+        
+        .ravenclaw-result {
+            background-color: rgba(14, 26, 64, 0.1);
+            border: 3px solid var(--ravenclaw-blue);
+        }
+        
+        .slytherin-result {
+            background-color: rgba(26, 71, 42, 0.1);
+            border: 3px solid var(--slytherin-green);
+        }
+        
+        .house-crest {
+            height: 150px;
+            margin: 1rem 0;
+        }
+        
+        .result-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .result-description {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .restart-btn {
+            background-color: var(--hogwarts-dark);
+            color: white;
+            margin-top: 1rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .quiz-header h1 {
+                font-size: 2rem;
+            }
+            
+            .options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="quiz-header">
+        <h1>Hogwarts Sorting Quiz</h1>
+        <img src="images/sorting-hat.png" alt="Sorting Hat">
+        <p>"The Sorting Hat will decide which house you belong in!"</p>
+    </header>
+
+    <div class="container">
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="quiz-container">
+            <!-- Question 1 -->
+            <div class="question active" id="question1">
+                <h2>Which quality do you value most?</h2>
+                <div class="options">
+                    <div class="option" data-house="gryffindor">Bravery</div>
+                    <div class="option" data-house="hufflepuff">Loyalty</div>
+                    <div class="option" data-house="ravenclaw">Intelligence</div>
+                    <div class="option" data-house="slytherin">Ambition</div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question" id="question2">
+                <h2>Which magical object would you choose?</h2>
+                <div class="options">
+                    <div class="option" data-house="gryffindor">Sword of Gryffindor</div>
+                    <div class="option" data-house="hufflepuff">Hufflepuff's Cup</div>
+                    <div class="option" data-house="ravenclaw">Ravenclaw's Diadem</div>
+                    <div class="option" data-house="slytherin">Slytherin's Locket</div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question" id="question3">
+                <h2>What would you do if you saw someone being bullied?</h2>
+                <div class="options">
+                    <div class="option" data-house="gryffindor">Confront the bully immediately</div>
+                    <div class="option" data-house="hufflepuff">Comfort the victim and report it</div>
+                    <div class="option" data-house="ravenclaw">Analyze the situation and find the best solution</div>
+                    <div class="option" data-house="slytherin">Decide if intervention benefits you</div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question" id="question4">
+                <h2>Which class would be your favorite?</h2>
+                <div class="options">
+                    <div class="option" data-house="gryffindor">Defense Against the Dark Arts</div>
+                    <div class="option" data-house="hufflepuff">Herbology</div>
+                    <div class="option" data-house="ravenclaw">Arithmancy</div>
+                    <div class="option" data-house="slytherin">Potions</div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question" id="question5">
+                <h2>Which magical creature would you want as a pet?</h2>
+                <div class="options">
+                    <div class="option" data-house="gryffindor">Phoenix</div>
+                    <div class="option" data-house="hufflepuff">Niffler</div>
+                    <div class="option" data-house="ravenclaw">Owl</div>
+                    <div class="option" data-house="slytherin">Snake</div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button class="prev-btn" disabled>Previous</button>
+                <button class="next-btn">Next</button>
+                <button class="submit-btn">Get My Results!</button>
+            </div>
+        </div>
+
+        <!-- Result Containers -->
+        <div class="result-container gryffindor-result" id="gryffindorResult">
+            <img src="images/gryffindorsymbol.png" alt="Gryffindor Crest" class="house-crest">
+            <h2 class="result-title">Gryffindor!</h2>
+            <p class="result-description">
+                Congratulations! The Sorting Hat has placed you in Gryffindor house, 
+                where dwell the brave at heart. Your daring, nerve, and chivalry set 
+                you apart. Like Harry Potter and Albus Dumbledore, you value courage 
+                above all else.
+            </p>
+            <a href="gryffindor.html" class="restart-btn">Learn About Gryffindor</a>
+            <button class="restart-btn" onclick="restartQuiz()">Take Quiz Again</button>
+        </div>
+
+        <div class="result-container hufflepuff-result" id="hufflepuffResult">
+            <img src="images/huffSymbol.png" alt="Hufflepuff Crest" class="house-crest">
+            <h2 class="result-title">Hufflepuff!</h2>
+            <p class="result-description">
+                Congratulations! The Sorting Hat has placed you in Hufflepuff house, 
+                where they are just and loyal. Your patience, dedication, and strong 
+                moral compass set you apart. Like Cedric Diggory and Newt Scamander, 
+                you value hard work and fairness.
+            </p>
+            <a href="hufflepuff.html" class="restart-btn">Learn About Hufflepuff</a>
+            <button class="restart-btn" onclick="restartQuiz()">Take Quiz Again</button>
+        </div>
+
+        <div class="result-container ravenclaw-result" id="ravenclawResult">
+            <img src="images/ravSymbol.png" alt="Ravenclaw Crest" class="house-crest">
+            <h2 class="result-title">Ravenclaw!</h2>
+            <p class="result-description">
+                Congratulations! The Sorting Hat has placed you in Ravenclaw house, 
+                where those of wit and learning will always find their kind. Your 
+                intelligence, creativity, and wisdom set you apart. Like Luna Lovegood 
+                and Filius Flitwick, you value knowledge above all else.
+            </p>
+            <a href="ravenclaw.html" class="restart-btn">Learn About Ravenclaw</a>
+            <button class="restart-btn" onclick="restartQuiz()">Take Quiz Again</button>
+        </div>
+
+        <div class="result-container slytherin-result" id="slytherinResult">
+            <img src="images/slythSymbol.png" alt="Slytherin Crest" class="house-crest">
+            <h2 class="result-title">Slytherin!</h2>
+            <p class="result-description">
+                Congratulations! The Sorting Hat has placed you in Slytherin house, 
+                where you'll make your real friends. Your ambition, cunning, and 
+                resourcefulness set you apart. Like Severus Snape and Merlin, you 
+                have the potential for greatness.
+            </p>
+            <a href="slytherin.html" class="restart-btn">Learn About Slytherin</a>
+            <button class="restart-btn" onclick="restartQuiz()">Take Quiz Again</button>
+        </div>
+    </div>
+
+    <script>
+        // Quiz Variables
+        const questions = document.querySelectorAll('.question');
+        const options = document.querySelectorAll('.option');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const submitBtn = document.querySelector('.submit-btn');
+        const progressBar = document.getElementById('progressBar');
+        let currentQuestion = 0;
+        const housePoints = {
+            gryffindor: 0,
+            hufflepuff: 0,
+            ravenclaw: 0,
+            slytherin: 0
+        };
+
+        // Initialize Quiz
+        updateProgressBar();
+        updateNavigation();
+
+        // Option Selection
+        options.forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selected class from all options in current question
+                const currentOptions = this.parentElement.querySelectorAll('.option');
+                currentOptions.forEach(opt => opt.classList.remove('selected'));
+                
+                // Add selected class to clicked option
+                this.classList.add('selected');
+                
+                // Store the selected house for this question
+                this.closest('.question').dataset.selectedHouse = this.dataset.house;
+                
+                // Enable next button
+                nextBtn.disabled = false;
+            });
+        });
+
+        // Navigation
+        nextBtn.addEventListener('click', function() {
+            if (currentQuestion < questions.length - 1) {
+                questions[currentQuestion].classList.remove('active');
+                currentQuestion++;
+                questions[currentQuestion].classList.add('active');
+                updateProgressBar();
+                updateNavigation();
+                
+                // Disable next button until an option is selected
+                nextBtn.disabled = true;
+            }
+        });
+
+        prevBtn.addEventListener('click', function() {
+            if (currentQuestion > 0) {
+                questions[currentQuestion].classList.remove('active');
+                currentQuestion--;
+                questions[currentQuestion].classList.add('active');
+                updateProgressBar();
+                updateNavigation();
+                
+                // Re-enable next button if an option was previously selected
+                if (questions[currentQuestion].dataset.selectedHouse) {
+                    nextBtn.disabled = false;
+                }
+            }
+        });
+
+        // Submit Quiz
+        submitBtn.addEventListener('click', function() {
+            // Calculate results
+            for (let i = 0; i < questions.length; i++) {
+                const selectedHouse = questions[i].dataset.selectedHouse;
+                if (selectedHouse) {
+                    housePoints[selectedHouse]++;
+                }
+            }
+            
+            // Determine winning house
+            let winningHouse = 'gryffindor';
+            let maxPoints = housePoints.gryffindor;
+            
+            for (const house in housePoints) {
+                if (housePoints[house] > maxPoints) {
+                    maxPoints = housePoints[house];
+                    winningHouse = house;
+                }
+            }
+            
+            // Show result
+            document.querySelector('.quiz-container').style.display = 'none';
+            document.getElementById(winningHouse + 'Result').style.display = 'block';
+            
+            // Save result to localStorage if user is logged in
+            if (localStorage.getItem('loggedIn') === 'true') {
+                localStorage.setItem('userHouse', winningHouse);
+            }
+        });
+
+        // Update Progress Bar
+        function updateProgressBar() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            progressBar.style.width = progress + '%';
+        }
+
+        // Update Navigation Buttons
+        function updateNavigation() {
+            prevBtn.disabled = currentQuestion === 0;
+            
+            if (currentQuestion === questions.length - 1) {
+                nextBtn.style.display = 'none';
+                submitBtn.style.display = 'block';
+            } else {
+                nextBtn.style.display = 'block';
+                submitBtn.style.display = 'none';
+            }
+        }
+
+        // Restart Quiz
+        function restartQuiz() {
+            // Reset quiz state
+            currentQuestion = 0;
+            for (const house in housePoints) {
+                housePoints[house] = 0;
+            }
+            
+            // Hide all results
+            document.querySelectorAll('.result-container').forEach(result => {
+                result.style.display = 'none';
+            });
+            
+            // Show first question
+            questions.forEach((question, index) => {
+                question.classList.remove('active');
+                delete question.dataset.selectedHouse;
+                if (index === 0) question.classList.add('active');
+            });
+            
+            // Reset options
+            options.forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Reset navigation
+            nextBtn.disabled = true;
+            nextBtn.style.display = 'block';
+            submitBtn.style.display = 'none';
+            document.querySelector('.quiz-container').style.display = 'block';
+            updateProgressBar();
+            updateNavigation();
+        }
+
+
+        // Check if user is logged in
+        if (localStorage.getItem('loggedIn') !== 'true') {
+            window.location.href = 'login.html';
+        }
+
+
+        submitBtn.addEventListener('click', function() {
+        // ... existing quiz result calculation ...
+        
+        // Save result to localStorage if user is logged in
+        if (localStorage.getItem('loggedIn') === 'true') {
+            localStorage.setItem('userHouse', winningHouse);
+        }
+        
+        // Show result
+        document.querySelector('.quiz-container').style.display = 'none';
+        document.getElementById(winningHouse + 'Result').style.display = 'block';
+    });
+    </script>
+</body>
+</html>
