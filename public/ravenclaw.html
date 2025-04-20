@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gryffindor House | Potterheads</title>
+    <title>Ravenclaw House | Potterheads</title>
     <style>
         :root {
-            --primary-color: #740001;
-            --secondary-color: #d3a625;
+            --primary-color: #0e1a40;
+            --secondary-color: #946b2d;
             --text-color: #3d3d3d;
-            --bg-color: #fff9e5;
+            --bg-color: #e8f4f8;
         }
+
         body {
             font-family: 'Georgia', serif;
             margin: 0;
@@ -132,9 +133,9 @@
 </head>
 <body>
     <header class="house-header">
-        <h1>Gryffindor House</h1>
-        <img src="images/gryffindorsymbol.png" alt="Gryffindor Crest">
-        <p>"You might belong in Gryffindor, where dwell the brave at heart, their daring, nerve, and chivalry set Gryffindors apart."</p>
+        <h1>Ravenclaw House</h1>
+        <img src="images/ravSymbol.png" alt="Ravenclaw Crest">
+        <p>"Or yet in wise old Ravenclaw, if you've a ready mind, where those of wit and learning will always find their kind."</p>
     </header>
 
     <div class="container">
@@ -142,14 +143,14 @@
             <div class="house-details">
                 <div class="founder">
                     <h2>Founder</h2>
-                    <h3>Godric Gryffindor</h3>
-                    <p>One of the four founders of Hogwarts School of Witchcraft and Wizardry, Godric Gryffindor prized courage, determination and strength of heart above all other qualities.</p>
+                    <h3>Rowena Ravenclaw</h3>
+                    <p>One of the four founders of Hogwarts, Rowena Ravenclaw prized intelligence, knowledge, curiosity, creativity and wit above all else.</p>
                 </div>
 
                 <div class="ghost">
                     <h2>House Ghost</h2>
-                    <h3>Nearly Headless Nick</h3>
-                    <p>Sir Nicholas de Mimsy-Porpington, known as Nearly Headless Nick, is the Gryffindor house ghost. He was beheaded but the axe was blunt so it didn't fully go through his neck.</p>
+                    <h3>The Grey Lady</h3>
+                    <p>The Grey Lady is the Ravenclaw house ghost. She is the daughter of Rowena Ravenclaw and was killed by the Bloody Baron who later became the Slytherin ghost.</p>
                 </div>
             </div>
 
@@ -157,14 +158,14 @@
                 <div class="traits-list">
                     <h2>House Traits</h2>
                     <ul>
-                        <li>Courage</li>
-                        <li>Bravery</li>
-                        <li>Nerve</li>
-                        <li>Chivalry</li>
-                        <li>Determination</li>
-                        <li>Daring</li>
-                        <li>Loyalty</li>
-                        <li>Adventurous spirit</li>
+                        <li>Intelligence</li>
+                        <li>Wisdom</li>
+                        <li>Creativity</li>
+                        <li>Learning</li>
+                        <li>Originality</li>
+                        <li>Individuality</li>
+                        <li>Acceptance</li>
+                        <li>Curiosity</li>
                     </ul>
                 </div>
             </div>
@@ -174,31 +175,31 @@
             <h2>Notable Members</h2>
             <div class="members-grid">
                 <div class="member-card">
-                    <img src="images/harry-potter.jpg" alt="Harry Potter">
+                    <img src="images/luna.jpg" alt="Luna Lovegood">
                     <div class="member-info">
-                        <h3>Harry Potter</h3>
-                        <p>The Boy Who Lived, defeater of Voldemort</p>
+                        <h3>Luna Lovegood</h3>
+                        <p>Quibbler editor, member of Dumbledore's Army</p>
                     </div>
                 </div>
                 <div class="member-card">
-                    <img src="images/hermione.jpg" alt="Hermione Granger">
+                    <img src="images/cho.jpg" alt="Cho Chang">
                     <div class="member-info">
-                        <h3>Hermione Granger</h3>
-                        <p>Brightest witch of her age</p>
+                        <h3>Cho Chang</h3>
+                        <p>Seeker for Ravenclaw Quidditch team</p>
                     </div>
                 </div>
                 <div class="member-card">
-                    <img src="images/ron.jpg" alt="Ron Weasley">
+                    <img src="images/flitwick.jpg" alt="Filius Flitwick">
                     <div class="member-info">
-                        <h3>Ron Weasley</h3>
-                        <p>Loyal friend, chess champion</p>
+                        <h3>Filius Flitwick</h3>
+                        <p>Charms professor, Head of Ravenclaw</p>
                     </div>
                 </div>
                 <div class="member-card">
-                    <img src="images/dumbledore.jpg" alt="Albus Dumbledore">
+                    <img src="images/quirrell.jpg" alt="Quirinus Quirrell">
                     <div class="member-info">
-                        <h3>Albus Dumbledore</h3>
-                        <p>Greatest wizard of modern times</p>
+                        <h3>Quirinus Quirrell</h3>
+                        <p>Former Defense Against the Dark Arts professor</p>
                     </div>
                 </div>
             </div>
@@ -207,11 +208,9 @@
         <a href="index.html" class="back-button">Back to Home</a>
     </div>
 
-    <script>
-        // Check if user is logged in
-        if (localStorage.getItem('loggedIn') !== 'true') {
-            window.location.href = 'login.html';
-        }
-    </script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="script.js"></script>    
 </body>
 </html>

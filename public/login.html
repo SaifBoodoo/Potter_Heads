@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Potterheads</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:wght@400;600&display=swap');
+        
+        body {
+            background-color: #0a0a1a;
+            background: linear-gradient(135deg, #f8f4e8 0%, #e8e0d0 50%, #d4c9a8 100%);
+            background-attachment: fixed;
+            background-size: cover;
+            font-family: 'Cormorant Garamond', serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .login-container {
+            background-color: #f5e7c1;
+            background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
+            width: 80%;
+            max-width: 500px;
+            padding: 40px;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(210, 175, 105, 0.6), 
+                        inset 0 0 30px rgba(139, 69, 19, 0.4);
+            position: relative;
+            color: #3a2c0d;
+            border: 2px solid #8b4513;
+            text-align: center;
+        }
+
+        .login-container::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid rgba(139, 69, 19, 0.3);
+            pointer-events: none;
+        }
+
+        .login-container h1 {
+            font-family: 'Cinzel Decorative', cursive;
+            color: #5c2d1a;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            letter-spacing: 2px;
+        }
+
+        .login-container p {
+            color: #5c2d1a;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #5c2d1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #8b4513;
+            padding: 12px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(210, 175, 105, 0.8);
+            background-color: white;
+        }
+
+        .login-btn {
+            background-color: #5c2d1a;
+            color: #f0e6d2;
+            border: none;
+            padding: 12px 20px;
+            margin-top: 10px;
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+            border-radius: 3px;
+        }
+
+        .login-btn:hover {
+            background-color: #7a3a23;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .error-message {
+            color: #8b0000;
+            margin-top: 1rem;
+            font-weight: 600;
+            display: none;
+        }
+
+        .house-banners {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .house-banner {
+            width: 50px;
+            height: auto;
+            opacity: 0.7;
+            transition: all 0.3s;
+        }
+
+        .house-banner:hover {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+
+        #message {
+            margin-top: 20px;
+            color: #5c2d1a;
+            font-weight: 600;
+        }
+
+        .login-container a {
+            color: #5c2d1a;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .login-container a:hover {
+            color: #7a3a23;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 500px) {
+            .login-container {
+                padding: 30px 20px;
+                width: 90%;
+            }
+            
+            .login-container h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <img src="images/logo.png" alt="Hogwarts Logo" width="100">
+        <h1>Welcome to Potterheads</h1>
+        <p>Please log in to take the sorting quiz</p>
+        
+        <div class="house-banners">
+            <img src="images/gryffindorsymbol.png" alt="Gryffindor" class="house-banner">
+            <img src="images/slythSymbol.png" alt="Slytherin" class="house-banner">
+            <img src="images/ravSymbol.png" alt="Ravenclaw" class="house-banner">
+            <img src="images/huffSymbol.png" alt="Hufflepuff" class="house-banner">
+        </div>
+        
+        <form class="login-form" id="login-form" method="post">
+            <div class="form-group">
+                <label for="email">Hogwarts Email</label>
+                <input type="email" id="email" name="email" required placeholder="yourname@potterheads.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Secret Spell</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your magical password">
+            </div>
+            
+            <button type="submit" class="login-btn">Login via Floo Network</button>
+            <p class="error-message" id="errorMessage">Invalid username or password</p>
+        </form>
+        
+        <p id="message"></p>
+        <p>Don't have an account? <a href="signup.html">Sign up for Hogwarts</a></p>
+        </br>
+        <a href="reset-password.html" id="forgot-password">Forgot Password?</a>
+        </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

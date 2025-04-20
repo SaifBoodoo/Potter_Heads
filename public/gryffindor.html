@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hufflepuff House | Potterheads</title>
+    <title>Gryffindor House | Potterheads</title>
     <style>
         :root {
-            --primary-color: #ffdb00;
-            --secondary-color: #000000;
+            --primary-color: #740001;
+            --secondary-color: #d3a625;
             --text-color: #3d3d3d;
-            --bg-color: #f8f8f8;
+            --bg-color: #fff9e5;
         }
-
         body {
             font-family: 'Georgia', serif;
             margin: 0;
@@ -133,9 +132,9 @@
 </head>
 <body>
     <header class="house-header">
-        <h1>Hufflepuff House</h1>
-        <img src="images/huffSymbol.png" alt="Hufflepuff Crest">
-        <p>"You might belong in Hufflepuff, where they are just and loyal, those patient Hufflepuffs are true and unafraid of toil."</p>
+        <h1>Gryffindor House</h1>
+        <img src="images/gryffindorsymbol.png" alt="Gryffindor Crest">
+        <p>"You might belong in Gryffindor, where dwell the brave at heart, their daring, nerve, and chivalry set Gryffindors apart."</p>
     </header>
 
     <div class="container">
@@ -143,14 +142,14 @@
             <div class="house-details">
                 <div class="founder">
                     <h2>Founder</h2>
-                    <h3>Helga Hufflepuff</h3>
-                    <p>One of the four founders of Hogwarts, Helga Hufflepuff valued hard work, patience, loyalty, and fair play. She accepted all students without bias.</p>
+                    <h3>Godric Gryffindor</h3>
+                    <p>One of the four founders of Hogwarts School of Witchcraft and Wizardry, Godric Gryffindor prized courage, determination and strength of heart above all other qualities.</p>
                 </div>
 
                 <div class="ghost">
                     <h2>House Ghost</h2>
-                    <h3>The Fat Friar</h3>
-                    <p>The Fat Friar is the friendly Hufflepuff ghost who was executed because senior churchmen grew suspicious of his ability to cure the pox merely by poking peasants with a stick.</p>
+                    <h3>Nearly Headless Nick</h3>
+                    <p>Sir Nicholas de Mimsy-Porpington, known as Nearly Headless Nick, is the Gryffindor house ghost. He was beheaded but the axe was blunt so it didn't fully go through his neck.</p>
                 </div>
             </div>
 
@@ -158,14 +157,14 @@
                 <div class="traits-list">
                     <h2>House Traits</h2>
                     <ul>
+                        <li>Courage</li>
+                        <li>Bravery</li>
+                        <li>Nerve</li>
+                        <li>Chivalry</li>
+                        <li>Determination</li>
+                        <li>Daring</li>
                         <li>Loyalty</li>
-                        <li>Patience</li>
-                        <li>Fairness</li>
-                        <li>Hard work</li>
-                        <li>Honesty</li>
-                        <li>Justice</li>
-                        <li>Modesty</li>
-                        <li>Kindness</li>
+                        <li>Adventurous spirit</li>
                     </ul>
                 </div>
             </div>
@@ -175,31 +174,31 @@
             <h2>Notable Members</h2>
             <div class="members-grid">
                 <div class="member-card">
-                    <img src="images/cedric.jpg" alt="Cedric Diggory">
+                    <img src="images/harry-potter.jpg" alt="Harry Potter">
                     <div class="member-info">
-                        <h3>Cedric Diggory</h3>
-                        <p>Triwizard Tournament champion</p>
+                        <h3>Harry Potter</h3>
+                        <p>The Boy Who Lived, defeater of Voldemort</p>
                     </div>
                 </div>
                 <div class="member-card">
-                    <img src="images/tonks.jpg" alt="Nymphadora Tonks">
+                    <img src="images/hermione.jpg" alt="Hermione Granger">
                     <div class="member-info">
-                        <h3>Nymphadora Tonks</h3>
-                        <p>Metamorphmagus and Auror</p>
+                        <h3>Hermione Granger</h3>
+                        <p>Brightest witch of her age</p>
                     </div>
                 </div>
                 <div class="member-card">
-                    <img src="images/newt.jpg" alt="Newt Scamander">
+                    <img src="images/ron.jpg" alt="Ron Weasley">
                     <div class="member-info">
-                        <h3>Newt Scamander</h3>
-                        <p>Magizoologist, author of Fantastic Beasts</p>
+                        <h3>Ron Weasley</h3>
+                        <p>Loyal friend, chess champion</p>
                     </div>
                 </div>
                 <div class="member-card">
-                    <img src="images/pomona.jpg" alt="Pomona Sprout">
+                    <img src="images/dumbledore.jpg" alt="Albus Dumbledore">
                     <div class="member-info">
-                        <h3>Pomona Sprout</h3>
-                        <p>Herbology professor, Head of Hufflepuff</p>
+                        <h3>Albus Dumbledore</h3>
+                        <p>Greatest wizard of modern times</p>
                     </div>
                 </div>
             </div>
@@ -208,11 +207,9 @@
         <a href="index.html" class="back-button">Back to Home</a>
     </div>
 
-    <script>
-        // Check if user is logged in
-        if (localStorage.getItem('loggedIn') !== 'true') {
-            window.location.href = 'login.html';
-        }
-    </script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="script.js"></script>    
 </body>
 </html>

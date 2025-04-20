@@ -1,0 +1,13 @@
+{
+  "hosting": {
+    "site": "potterheads-cd745-ed3d3",
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
+
+// firebase deploy --only hosting:potterheads-cd745-ed3d3

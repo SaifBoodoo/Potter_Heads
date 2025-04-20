@@ -205,6 +205,8 @@
             background-color: var(--hogwarts-dark);
             color: white;
             margin-top: 1rem;
+            margin-right: 10px;
+            font-size: large;
         }
         
         @keyframes fadeIn {
@@ -352,6 +354,11 @@
         </div>
     </div>
 
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="script.js"></script>
     <script>
         // Quiz Variables
         const questions = document.querySelectorAll('.question');
@@ -420,14 +427,14 @@
         });
 
         // Submit Quiz
-        submitBtn.addEventListener('click', function() {
-            // Calculate results
-            for (let i = 0; i < questions.length; i++) {
-                const selectedHouse = questions[i].dataset.selectedHouse;
-                if (selectedHouse) {
-                    housePoints[selectedHouse]++;
+            submitBtn.addEventListener('click', function() {
+                // Calculate results
+                for (let i = 0; i < questions.length; i++) {
+                    const selectedHouse = questions[i].dataset.selectedHouse;
+                    if (selectedHouse) {
+                        housePoints[selectedHouse]++;
+                    }
                 }
-            }
             
             // Determine winning house
             let winningHouse = 'gryffindor';
@@ -440,6 +447,28 @@
                 }
             }
             
+
+                    // Get current user and save result to Firestore
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    // User is signed in
+                    const uid = user.uid;
+                    const email = user.email; // Get the user's email
+                    const db = firebase.firestore(); // Initialize Firestore here
+                    db.collection('users').doc(uid).set({
+                        house: winningHouse,
+                        email: email // Save the email to Firestore
+                    }).then(() => {
+                        console.log("House assignment saved to Firestore.");
+                    }).catch((error) => {
+                        console.error("Error saving house assignment:", error);
+                    });
+                } else {
+                    // No user is signed in
+                    console.log("No user is signed in.");
+                }
+            });
+
             // Show result
             document.querySelector('.quiz-container').style.display = 'none';
             document.getElementById(winningHouse + 'Result').style.display = 'block';
@@ -502,26 +531,6 @@
             updateProgressBar();
             updateNavigation();
         }
-
-
-        // Check if user is logged in
-        if (localStorage.getItem('loggedIn') !== 'true') {
-            window.location.href = 'login.html';
-        }
-
-
-        submitBtn.addEventListener('click', function() {
-        // ... existing quiz result calculation ...
-        
-        // Save result to localStorage if user is logged in
-        if (localStorage.getItem('loggedIn') === 'true') {
-            localStorage.setItem('userHouse', winningHouse);
-        }
-        
-        // Show result
-        document.querySelector('.quiz-container').style.display = 'none';
-        document.getElementById(winningHouse + 'Result').style.display = 'block';
-    });
     </script>
 </body>
 </html>
